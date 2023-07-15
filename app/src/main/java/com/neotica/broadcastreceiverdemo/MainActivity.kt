@@ -3,7 +3,10 @@ package com.neotica.broadcastreceiverdemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.neotica.broadcastreceiverdemo.databinding.ActivityMainBinding
+import android.Manifest
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var binding: ActivityMainBinding? = null
@@ -15,8 +18,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding?.btnPermission?.setOnClickListener(this)
     }
 
+    var requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(this, "Sms receiver permission diterima", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Sms receiver permission ditolak", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onClick(v: View?) {
-        when(v?.id){}
+        when(v?.id){
+            R.id.btn_permission -> requestPermissionLauncher.launch(Manifest.permission.RECEIVE_SMS)}
     }
 
     override fun onDestroy() {
