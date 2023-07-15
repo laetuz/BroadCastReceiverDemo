@@ -10,8 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BroadCastReceiverDemo"
+        android:theme="@style/Theme.Broadcast.SmsReceiver"
         tools:targetApi="31">
+        <activity
+            android:name=".SmsReceiver"
+            android:exported="false"
+            android:label="@string/title_activity_sms_receiver"
+            android:theme="@style/Theme.BroadCastReceiverDemo" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
